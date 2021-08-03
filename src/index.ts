@@ -22,6 +22,6 @@ app.listen(PORT, () => {
 });
 
 (async () => {
-  let document = await KittenModel.create({ name: 'Morris', species: 'GrayCat' });
+  let k = await KittenModel.create({})
 })();
 
