@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { File, FileModel } from './file.model';
 
 export default class FileService {
@@ -9,13 +11,19 @@ export default class FileService {
     return await FileModel.find({});
   }
 
-  public static create(name: string, path: string, content: string): Promise<File> {
-    return FileModel.create({
+  public static async create(name: string, path: string, content: string): Promise<File> {
+    return await FileModel.create({
       name,
       path,
       content,
       createdAt: new Date()
     } as File);
+  }
+
+  public static async isAdmin(id: string) {
+    const user = await axios.get(`http://localhost:3000/users/${id}`);
+    console.log('++++++', user);
+    return user.data.role.name === 'Admin';
   }
 
 }

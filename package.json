@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@typegoose/typegoose": "^8.1.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.2",
     "express": "^4.17.1",
     "mongoose": "^5.13.5",

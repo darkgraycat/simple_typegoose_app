@@ -1,20 +1,16 @@
 import { Request, Response } from 'express';
 import { STATUS_CODE } from '../common/constants';
-import logger from '../common/logger';
 import FileService from './file.service';
 
 export default class FileController {
   public static async upload(req: Request, res: Response) {
-    try {
-      // make fetch to another db
-      // if admin, then create
+    const isAdmin: boolean = await FileService.isAdmin(req.body.userId);
+    if (isAdmin) {
       const { name, path, content } = req.body;
       const file = await FileService.create(name, path, content);
       return res.status(STATUS_CODE.CREATED).send('Created');
-    } catch (err) {
-      logger.error(err.stack);
-      return res.status(STATUS_CODE.FORBIDDEN).send(err.message);
     }
+    return res.sendStatus(STATUS_CODE.FORBIDDEN);
   }
 
   public static async getAll(req: Request, res: Response) {
