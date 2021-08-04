@@ -4,7 +4,7 @@ import FileService from './file.service';
 
 export default class FileController {
   public static async upload(req: Request, res: Response) {
-    const isAdmin: boolean = await FileService.isAdmin(req.body.userId);
+    const isAdmin = await FileService.isAdmin(req.body.userId);
     if (isAdmin) {
       const { name, path, content } = req.body;
       const file = await FileService.create(name, path, content);

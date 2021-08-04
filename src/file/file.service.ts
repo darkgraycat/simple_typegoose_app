@@ -20,10 +20,9 @@ export default class FileService {
     } as File);
   }
 
-  public static async isAdmin(id: string) {
-    const user = await axios.get(`http://localhost:3000/users/${id}`);
-    console.log('++++++', user);
-    return user.data.role.name === 'Admin';
+  public static async isAdmin(id: string): Promise<boolean> {
+    const response = await axios.get(`http://localhost:3000/users/isAdmin/${id}`);
+    return response.data;
   }
 
 }
