@@ -1,14 +1,14 @@
 @echo off
 set module=%1
-set path=%~dp0%module%
+set path=%~dp0models\%module%
 set model=%module%Model
 set router=%module%Router
 set controller=%module%Controller
 set service=%module%Service
-set model_path=%module%.model.ts
-set router_path=%module%.router.ts
-set controller_path=%module%.controller.ts
-set service_path=%module%.service.ts
+set model_path=%module%.model
+set router_path=%module%.router
+set controller_path=%module%.controller
+set service_path=%module%.service
 
 mkdir %path%
 echo creating model
@@ -16,7 +16,7 @@ echo creating model
   echo export default class %model% ^{
   echo.
   echo ^}
-)>%path%/%model_path%
+)>%path%/%model_path%.ts
 echo creating router
 (
   echo import ^{ Router ^} from 'express';
@@ -26,7 +26,7 @@ echo creating router
   echo.
   echo router.get^('/', %controller%.action^);
   echo.
-)>%path%/%router_path%
+)>%path%/%router_path%.ts
 
 echo creating controller
 (
@@ -39,7 +39,7 @@ echo creating controller
   echo   ^}
   echo ^}
   echo.
-)>%path%/%controller_path%
+)>%path%/%controller_path%.ts
 
 echo creating service
 (
@@ -49,4 +49,4 @@ echo creating service
   echo   ^}
   echo ^}
   echo.
-)>%path%/%service_path%
+)>%path%/%service_path%.ts
