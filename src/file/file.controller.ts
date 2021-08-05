@@ -4,7 +4,8 @@ import FileService from './file.service';
 
 export default class FileController {
   public static async upload(req: Request, res: Response) {
-    if (!req.file) throw new Error('No file!');
+    if (!req.file)
+      return res.status(STATUS_CODE.BAD_REQUEST).send('No file');
     const {
       originalname,
       path,
