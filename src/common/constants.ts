@@ -10,4 +10,4 @@ export enum STATUS_CODE {
   NOT_IMPLEMENTED = 501,
 }
 
-export const PAGE_LIMIT = 3;
+export const PAGE_LIMIT = 10;
