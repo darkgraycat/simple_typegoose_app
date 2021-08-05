@@ -4,12 +4,11 @@ export class File {
   @prop()
   public name: string;
 
-  // @prop({ unique: true })
   @prop()
   public path: string;
 
   @prop()
-  public content: string;
+  public type: string;
 
   @prop()
   public createdAt?: Date;

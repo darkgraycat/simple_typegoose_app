@@ -4,15 +4,14 @@ import FileService from './file.service';
 
 export default class FileController {
   public static async upload(req: Request, res: Response) {
-    // const isAdmin = await FileService.isAdmin(req.body.userId);
-    const isAdmin = true; //for test
-
-    if (isAdmin) {
-      const { name, path, content } = req.body;
-      const file = await FileService.create(name, path, content);
-      return res.status(STATUS_CODE.CREATED).send('Created');
-    }
-    return res.sendStatus(STATUS_CODE.FORBIDDEN);
+    if (!req.file) throw new Error('No file!');
+    const {
+      originalname,
+      path,
+      mimetype
+    } = req.file;
+    await FileService.create(originalname, path, mimetype);
+    return res.status(STATUS_CODE.CREATED).send('Created');
   }
 
   public static async getAll(req: Request, res: Response) {

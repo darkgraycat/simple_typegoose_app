@@ -1,31 +1,23 @@
-import { Request, Response } from 'express';
-import multer, { Multer } from 'multer';
-import path from 'path';
+import axios from 'axios';
+import { RequestHandler } from 'express';
+import multer, { Multer, FileFilterCallback } from 'multer';
 
-import logger from '../common/logger';
+export const upload: RequestHandler = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, next) => {
+      next(null, './images')
+    },
+    filename: (req, file, next) => {
+      next(null, `${Date.now()}_${file.originalname}`);
+    },
+  }),
+}).single('file');
 
-export const uploadFile = (req: Request, res: Response) => { };
-
-export const uploadImage = (req: Request, res: Response) => { };
-
-const storage = multer.diskStorage({
-  destination: (req, file, next) => {
-    logger.log('DEST');
-    next(null, './images')
-  },
-  filename: (req, file, next) => {
-    logger.log('NAME');
-    next(null, Date.now() + path.extname(file.originalname))
-  },
-
-});
-
-export const upload = multer({ storage });
-
-// const upload: Multer = multer({
-//   storage: multer.diskStorage({
-//     destination: (req, file, next) => {
-
-//     }
-//   });
-// });
+export const isAdmin: RequestHandler = async (req, res, next) => {
+  const isAdmin = (await axios.get(`http://localhost:3000/users/isAdmin/${req.params.userId}`)).data;
+  if (isAdmin) {
+    next();
+  } else {
+    next(new Error('This user hasnt permissions to upload'));
+  }
+}
