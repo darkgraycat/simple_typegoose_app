@@ -9,3 +9,5 @@ export enum STATUS_CODE {
   SERVER_ERROR = 500,
   NOT_IMPLEMENTED = 501,
 }
+
+export const PAGE_LIMIT = 3;

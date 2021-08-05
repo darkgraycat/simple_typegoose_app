@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { RequestHandler } from 'express';
-import multer, { Multer, FileFilterCallback } from 'multer';
+import multer from 'multer';
 
 export const upload: RequestHandler = multer({
   storage: multer.diskStorage({
