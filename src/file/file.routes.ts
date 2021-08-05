@@ -2,7 +2,6 @@ import { Router } from 'express';
 
 import FileController from './file.controller';
 
-
 export const router = Router();
 
 router.post('/', FileController.upload);
