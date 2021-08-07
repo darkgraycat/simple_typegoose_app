@@ -12,7 +12,6 @@ export class File {
 
   @prop()
   public createdAt?: Date;
-
 }
 
 export const FileModel = getModelForClass(File);

@@ -2,6 +2,9 @@ import axios from 'axios';
 import { RequestHandler } from 'express';
 import multer from 'multer';
 
+import { HOST, USERDB_PORT } from '../common/constants';
+import UserDBService from '../userdb/userdb.service';
+
 export const upload: RequestHandler = multer({
   storage: multer.diskStorage({
     destination: (req, file, next) => {
@@ -14,8 +17,7 @@ export const upload: RequestHandler = multer({
 }).single('file');
 
 export const isAdmin: RequestHandler = async (req, res, next) => {
-  const isAdmin = (await axios.get(`http://localhost:3000/users/isAdmin/${req.params.userId}`)).data;
-  if (isAdmin) {
+  if (await UserDBService.fetchIsAdmin(req.params.userId)) {
     next();
   } else {
     next(new Error('This user hasnt permissions to upload'));

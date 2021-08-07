@@ -7,7 +7,7 @@ import { upload, isAdmin } from './file.middleware';
 export const router = Router();
 
 router.post('/:userId', isAdmin, upload, FileController.upload);
-router.get('/:page', FileController.getAll);
-router.get('/:name', FileController.getAll);
+router.get('/', FileController.getAll);
+router.get('/:name', FileController.get);
 
 router.use(errorHandler);

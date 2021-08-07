@@ -21,5 +21,4 @@ export default class FileService {
       createdAt: new Date()
     } as File);
   }
-
 }

@@ -6,6 +6,7 @@ export default class FileController {
   public static async upload(req: Request, res: Response) {
     if (!req.file)
       return res.status(STATUS_CODE.BAD_REQUEST).send('No file');
+
     const {
       originalname,
       path,
@@ -16,7 +17,7 @@ export default class FileController {
   }
 
   public static async getAll(req: Request, res: Response) {
-    const page = parseInt(req.params.page);
+    const page = (typeof req.query.page === 'string') ? parseInt(req.query.page) | 0 : 0;
     if (page < 1) return res.sendStatus(STATUS_CODE.BAD_REQUEST);
     return res.status(STATUS_CODE.OK).send(await FileService.getAll(page));
   }
@@ -26,5 +27,4 @@ export default class FileController {
       await FileService.getByName(req.params.name)
     );
   }
-
 }
