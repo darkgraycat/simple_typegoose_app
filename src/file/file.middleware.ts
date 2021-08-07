@@ -1,8 +1,5 @@
-import axios from 'axios';
 import { RequestHandler } from 'express';
 import multer from 'multer';
-
-import { HOST, USERDB_PORT } from '../common/constants';
 import UserDBService from '../userdb/userdb.service';
 
 export const upload: RequestHandler = multer({
