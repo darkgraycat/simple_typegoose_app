@@ -5,7 +5,7 @@ import FileService from './file.service';
 export default class FileController {
   public static async upload(req: Request, res: Response) {
     if (!req.file)
-      return res.status(STATUS_CODE.BAD_REQUEST).send('No file');
+      return res.sendStatus(STATUS_CODE.BAD_REQUEST);
 
     const {
       originalname,
@@ -13,7 +13,7 @@ export default class FileController {
       mimetype
     } = req.file;
     await FileService.create(originalname, path, mimetype);
-    return res.status(STATUS_CODE.CREATED).send('Created');
+    return res.sendStatus(STATUS_CODE.CREATED);
   }
 
   public static async getAll(req: Request, res: Response) {
