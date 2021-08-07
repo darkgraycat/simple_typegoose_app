@@ -17,7 +17,7 @@ export default class FileController {
   }
 
   public static async getAll(req: Request, res: Response) {
-    const page = (typeof req.query.page === 'string') ? parseInt(req.query.page) | 0 : 0;
+    const page: number = res.locals.page;
     if (page < 1) return res.sendStatus(STATUS_CODE.BAD_REQUEST);
     return res.status(STATUS_CODE.OK).send(await FileService.getAll(page));
   }

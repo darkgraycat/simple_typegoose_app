@@ -19,4 +19,10 @@ export const isAdmin: RequestHandler = async (req, res, next) => {
   } else {
     next(new Error('This user hasnt permissions to upload'));
   }
-}
+};
+
+export const parsePage: RequestHandler = async (req, res, next) => {
+  const page: number = parseInt(req.query.page as string);
+  res.locals.page = page;
+  next();
+};
