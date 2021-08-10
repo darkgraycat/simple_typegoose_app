@@ -5,16 +5,20 @@
   "main": "index.js",
   "dependencies": {
     "@typegoose/typegoose": "^8.1.0",
+    "@types/multer": "^1.4.7",
+    "axios": "^0.21.1",
     "chalk": "^4.1.2",
     "express": "^4.17.1",
-    "mongoose": "^5.13.5"
+    "mongoose": "^5.13.5",
+    "multer": "^1.4.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "userdb": "node X:/learn/softserve/sequelize_app/dist"
   },
   "repository": {
     "type": "git",
